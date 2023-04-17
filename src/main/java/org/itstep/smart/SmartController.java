@@ -1,6 +1,5 @@
-package smart;
+package org.itstep.smart;
 
-import org.itstep.firm.Firm;
 import org.itstep.firm.FirmService;
 import org.itstep.os.Os;
 import org.itstep.os.OsService;
@@ -11,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-
+public class SmartController {
+}
+ /*
 @Controller
 public class SmartController {
     @Autowired
@@ -37,6 +38,7 @@ public class SmartController {
         model.addAttribute("oss", osService.findAll());
         return "smart_add";
     }
+
 
     @PostMapping(value = "/os_add")
     public String firmSave(Os os, Model model, HttpServletResponse response) {
@@ -70,4 +72,6 @@ public class SmartController {
         return "redirect:/oss";
     }
 }
+     */
+
 
