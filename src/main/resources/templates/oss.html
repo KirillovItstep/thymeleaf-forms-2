@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <h3>List of os</h3>
@@ -17,7 +19,7 @@
         <td th:utext="${os.developer}"></td>
         <td>
             <form th:action="@{/os_delete(id=${os.id})}" th:method="delete">
-                <a href="#" onclick="this.closest('os').submit();return false;" style="display: inline;">Delete</a>
+                <a href="#" onclick="this.closest('form').submit();return false;" style="display: inline;">Delete</a>
                 &nbsp
                 <a th:href="@{/os_update(id=${os.id})}">Edit</a>
             </form>
@@ -26,5 +28,6 @@
     </tr>
     </tbody>
 </table>
+<a href="/os_add">Create OS</a>
 </body>
 </html>

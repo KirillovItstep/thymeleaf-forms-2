@@ -28,8 +28,8 @@
             <label for="os" class="form-label">Operating system</label>
             <select  class="form-select" aria-label="OS" id="os" name="os">
                 <option></option>
-                <th:block th:each="os: ${oss}">
-                    <option th:utext="|${os.name} - ${os.developer}|" th:value="${os.id}"></option>
+                <th:block th:each="osi: ${oss}">
+                    <option th:utext="|${osi.name} - ${osi.developer}|" th:value="${osi.id}"></option>
                 </th:block>
             </select>
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+
 @Controller
 public class FirmController {
     @Autowired
@@ -48,6 +49,7 @@ public class FirmController {
         model.addAttribute("firm", oldFirm);
         return "firm_update";
     }
+
     @PutMapping(value = "/firm_update")
     public String firmUpdate(Firm firm, Model model){
      Firm oldFirm=firmService.findById(firm.getId());

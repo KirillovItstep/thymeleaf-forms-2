@@ -53,33 +53,31 @@ public class SmartController {
         smartService.deleteById(id);
         return "redirect:/smarts";
     }
+
+
+    @GetMapping(value ="/smart_edit")
+    public String editSmart(Model model, @RequestParam(name="id")Long id) {
+        Smart smartphone = smartService.findById(id);
+        model.addAttribute("smart",smartphone);
+        model.addAttribute("os",osService.findAll());
+        model.addAttribute("firms",firmService.findAll());
+        return "smart_edit";
+    }
+
+    @PutMapping(value="/smart_update")
+    public String updateSmart(Smart smartphone, Model model) {
+        Smart smartphoneDb = smartService.findById(smartphone.getId());
+        //System.out.println(smartphone.getFirm());
+        //System.out.println(smartphoneDb.getFirm());
+        smartphoneDb.setName(smartphone.getName());
+        smartphoneDb.setFirm(smartphone.getFirm());
+        smartphoneDb.setOs(smartphone.getOs());
+        smartphoneDb.setSize(smartphone.getSize());
+        smartphoneDb.setColor(smartphone.getColor());
+        smartService.save(smartphoneDb);
+        model.addAttribute("smarts", osService.findAll());
+        return "redirect:/smarts";
+    }
 }
-
-/*
-
-    @DeleteMapping(value = "/os_delete")
-    public String firmDelete(@RequestParam(name = "id") Long id) {
-        osService.deleteById(id);
-        return "redirect:/os";
-    }
-
-    @GetMapping(value = "/os_update")
-    public String firmGetUpdate(Model model, @RequestParam(name = "id") Long id) {
-        Os oldOs = osService.findById(id);
-        model.addAttribute("os", oldOs);
-        return "os_update";
-    }
-
-    @PutMapping(value = "/os_update")
-    public String firmUpdate(Os os, Model model) {
-        Os oldOs = osService.findById(os.getId());
-        oldOs.setName(os.getName());
-        oldOs.setDeveloper(os.getDeveloper());
-        osService.save(oldOs);
-        model.addAttribute("oss", osService.findAll());
-        return "redirect:/oss";
-    }
-}
-     */
 
 
