@@ -10,7 +10,7 @@
     <link rel="stylesheet"  th:href="@{/css/style.css}">
 </head>
 <body>
-
+<th:block th:insert="nav.html"></th:block>
 <div class="container mt-5">
     <h3>List of smartphones</h3>
     <table class="table table-striped w-auto">
@@ -34,13 +34,12 @@
                 <label class="color">
                     <span th:style="|background-color:${smart.color};|"></span>
                 </label>
-
             </td>
             <td>
                 <form th:action="@{/smart_delete(id=${smart.id})}" th:method="delete">
                     <a href="#" onclick="this.closest('form').submit();return false;" style="display: inline;">Delete</a>
                 </form>
-                &nbsp<a th:href="@{/edit_smart(id=${smart.id})}">Update</a></td>
+                &nbsp<a th:href="@{/smart_update(id=${smart.id})}">Update</a></td>
         </tr>
         </tbody>
     </table>

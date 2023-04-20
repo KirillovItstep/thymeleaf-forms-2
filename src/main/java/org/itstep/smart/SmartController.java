@@ -22,6 +22,11 @@ public class SmartController {
     @Autowired
     OsService osService;
 
+    @GetMapping(value = "/")
+    public String index() {
+        return "index";
+    }
+
     @GetMapping(value = "/smarts")
     public String firms(Model model) {
         model.addAttribute("smarts", smartService.findAll());
@@ -55,13 +60,13 @@ public class SmartController {
     }
 
 
-    @GetMapping(value ="/smart_edit")
+    @GetMapping(value ="/smart_update")
     public String editSmart(Model model, @RequestParam(name="id")Long id) {
         Smart smartphone = smartService.findById(id);
         model.addAttribute("smart",smartphone);
         model.addAttribute("os",osService.findAll());
         model.addAttribute("firms",firmService.findAll());
-        return "smart_edit";
+        return "smart_update";
     }
 
     @PutMapping(value="/smart_update")
