@@ -4,15 +4,15 @@ import org.itstep.firm.FirmService;
 import org.itstep.os.Os;
 import org.itstep.os.OsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletResponse;
 
-public class SmartController {
-}
- /*
+
 @Controller
 public class SmartController {
     @Autowired
@@ -22,14 +22,11 @@ public class SmartController {
     @Autowired
     OsService osService;
 
-
-
     @GetMapping(value = "/smarts")
     public String firms(Model model) {
         model.addAttribute("smarts", smartService.findAll());
         return "smarts";
     }
-
 
     @GetMapping(value = "/smart_add")
     public String smartAdd(Model model) {
@@ -39,15 +36,26 @@ public class SmartController {
         return "smart_add";
     }
 
+    @PostMapping(value = "/smart_add")
+    public String smartSave(Smart smart, Model model, HttpServletResponse response) {
+        if (smart.getFirm()==null || smart.getOs()==null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The firm or the OS is null");
 
-    @PostMapping(value = "/os_add")
-    public String firmSave(Os os, Model model, HttpServletResponse response) {
-        Os newOs = osService.save(os);
-        long id = newOs.getId();
+        Smart newSmart = smartService.save(smart);
+        long id = newSmart.getId();
         response.addHeader("id", String.valueOf(id));
-        model.addAttribute("oss", osService.findAll());
-        return "redirect:/oss";
+        model.addAttribute("smarts", smartService.findAll());
+        return "redirect:/smarts";
     }
+
+    @DeleteMapping(value ="/smart_delete")
+    public String deleteSmartphone(@RequestParam(name="id")Long id) {
+        smartService.deleteById(id);
+        return "redirect:/smarts";
+    }
+}
+
+/*
 
     @DeleteMapping(value = "/os_delete")
     public String firmDelete(@RequestParam(name = "id") Long id) {
